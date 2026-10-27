@@ -3,23 +3,49 @@ import "./App.css";
 
 export default function App() {
   const [namaTurnamen, setNamaTurnamen] = useState(
-    "TURNAMEN FUTSAL PAPUA 2026"
-  );
+  localStorage.getItem("turnamen") ||
+  "TURNAMEN FUTSAL TANDUS CUP 2 2026"
+);
 
-  const [teamA, setTeamA] = useState("TIM A");
-  const [teamB, setTeamB] = useState("TIM B");
+  const [teamA, setTeamA] = useState(
+  localStorage.getItem("teamA") || "TIM A"
+);
 
-  const [scoreA, setScoreA] = useState(0);
-  const [scoreB, setScoreB] = useState(0);
+const [teamB, setTeamB] = useState(
+  localStorage.getItem("teamB") || "TIM B"
+);
 
-  const [foulA, setFoulA] = useState(0);
-  const [foulB, setFoulB] = useState(0);
+  const [scoreA, setScoreA] = useState(
+  Number(localStorage.getItem("scoreA")) || 0
+);
 
-  const [yellowA, setYellowA] = useState(0);
-  const [yellowB, setYellowB] = useState(0);
+const [scoreB, setScoreB] = useState(
+  Number(localStorage.getItem("scoreB")) || 0
+);
 
-  const [redA, setRedA] = useState(0);
-  const [redB, setRedB] = useState(0);
+  const [foulA, setFoulA] = useState(
+  Number(localStorage.getItem("foulA")) || 0
+);
+
+const [foulB, setFoulB] = useState(
+  Number(localStorage.getItem("foulB")) || 0
+);
+
+  const [yellowA, setYellowA] = useState(
+  Number(localStorage.getItem("yellowA")) || 0
+);
+
+const [yellowB, setYellowB] = useState(
+  Number(localStorage.getItem("yellowB")) || 0
+);
+
+  const [redA, setRedA] = useState(
+  Number(localStorage.getItem("redA")) || 0
+);
+
+const [redB, setRedB] = useState(
+  Number(localStorage.getItem("redB")) || 0
+);
 
   // MATCH TIMER
   const [matchSeconds, setMatchSeconds] = useState(20 * 60);
@@ -98,36 +124,71 @@ export default function App() {
 
   // TIMER TIMEOUT
   useEffect(() => {
-    let interval;
+  let interval;
 
-    if (timeoutMode && timeoutSeconds > 0) {
-      interval = setInterval(() => {
-        setTimeoutSeconds((prev) => prev - 1);
-      }, 1000);
-    }
+  if (timeoutMode && timeoutSeconds > 0) {
+    interval = setInterval(() => {
+      setTimeoutSeconds((prev) => prev - 1);
+    }, 1000);
+  }
 
-    if (timeoutMode && timeoutSeconds === 0) {
-      playEnd();
+  return () => clearInterval(interval);
+}, [timeoutMode, timeoutSeconds]);
 
-      setTimeoutMode(false);
+// TEMPEL BLOK BARU DI SINI
+useEffect(() => {
+  localStorage.setItem("turnamen", namaTurnamen);
+}, [namaTurnamen]);
 
-      setTimeoutSeconds(60);
+useEffect(() => {
+  localStorage.setItem("teamA", teamA);
+}, [teamA]);
 
-      setRunning(false);
-    }
+useEffect(() => {
+  localStorage.setItem("teamB", teamB);
+}, [teamB]);
 
-    return () => clearInterval(interval);
-  }, [timeoutMode, timeoutSeconds]);
+useEffect(() => {
+  localStorage.setItem("scoreA", scoreA);
+}, [scoreA]);
 
-  const formatTime = (time) => {
-    const menit = Math.floor(time / 60);
-    const detik = time % 60;
+useEffect(() => {
+  localStorage.setItem("scoreB", scoreB);
+}, [scoreB]);
 
-    return `${String(menit).padStart(2, "0")}:${String(
-      detik
-    ).padStart(2, "0")}`;
-  };
+useEffect(() => {
+  localStorage.setItem("foulA", foulA);
+}, [foulA]);
 
+useEffect(() => {
+  localStorage.setItem("foulB", foulB);
+}, [foulB]);
+
+useEffect(() => {
+  localStorage.setItem("yellowA", yellowA);
+}, [yellowA]);
+
+useEffect(() => {
+  localStorage.setItem("yellowB", yellowB);
+}, [yellowB]);
+
+useEffect(() => {
+  localStorage.setItem("redA", redA);
+}, [redA]);
+
+useEffect(() => {
+  localStorage.setItem("redB", redB);
+}, [redB]);
+
+// BARU SETELAH ITU
+const formatTime = (time) => {
+  const menit = Math.floor(time / 60);
+  const detik = time % 60;
+
+  return `${String(menit).padStart(2, "0")}:${String(
+    detik
+  ).padStart(2, "0")}`;
+};
   const startTimer = () => {
     playStart();
     setRunning(true);
@@ -166,21 +227,32 @@ export default function App() {
   };
 
   const resetMatch = () => {
-    setScoreA(0);
-    setScoreB(0);
+  setScoreA(0);
+  setScoreB(0);
 
-    setFoulA(0);
-    setFoulB(0);
+  setFoulA(0);
+  setFoulB(0);
 
-    setYellowA(0);
-    setYellowB(0);
+  setYellowA(0);
+  setYellowB(0);
 
-    setRedA(0);
-    setRedB(0);
+  setRedA(0);
+  setRedB(0);
 
-    resetTimer();
-  };
+  localStorage.removeItem("scoreA");
+  localStorage.removeItem("scoreB");
 
+  localStorage.removeItem("foulA");
+  localStorage.removeItem("foulB");
+
+  localStorage.removeItem("yellowA");
+  localStorage.removeItem("yellowB");
+
+  localStorage.removeItem("redA");
+  localStorage.removeItem("redB");
+
+  resetTimer();
+};
   return (
     <div className="app">
 
