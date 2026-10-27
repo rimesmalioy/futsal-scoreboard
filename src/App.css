@@ -300,8 +300,3 @@ body {
     font-size: 180px;
   }
 }
-
-@media (max-width: 1000px) {
-
-  .scoreboard {
-    grid-template-columns: 
