@@ -265,6 +265,25 @@ const formatTime = (time) => {
           }
         />
       </div>
+      <div className="top-timer">
+
+  <div
+    className={
+      blink ? "timer blink" : "timer"
+    }
+  >
+    {timeoutMode
+      ? formatTime(timeoutSeconds)
+      : formatTime(matchSeconds)}
+  </div>
+
+  <div className="period">
+    {timeoutMode
+      ? "TIME OUT"
+      : gameMode}
+  </div>
+
+</div>
 
       <div className="scoreboard">
 
@@ -296,26 +315,7 @@ const formatTime = (time) => {
 
         </div>
 
-        <div className="center-side">
-
-          <div
-            className={
-              blink ? "timer blink" : "timer"
-            }
-          >
-            {timeoutMode
-              ? formatTime(timeoutSeconds)
-              : formatTime(matchSeconds)}
-          </div>
-
-          <div className="period">
-            {timeoutMode
-              ? "TIME OUT"
-              : gameMode}
-          </div>
-
-        </div>
-
+        
         <div className="team-side">
 
           <input
