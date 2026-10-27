@@ -1,0 +1,297 @@
+@font-face {
+  font-family: "Digital7";
+  src: url("./fonts/Digital-7.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  background: #000;
+  padding: 20px;
+}
+
+/* HEADER */
+
+.header-panel {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.tournament-input {
+  width: 900px;
+  max-width: 95%;
+
+  text-align: center;
+
+  background: #111;
+  color: white;
+
+  border: 2px solid #333;
+  border-radius: 12px;
+
+  padding: 15px;
+
+  font-size: 34px;
+  font-weight: bold;
+}
+
+/* SCOREBOARD */
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr 450px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* TEAM */
+
+.team-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-input {
+  width: 300px;
+
+  padding: 12px;
+
+  text-align: center;
+
+  background: #111;
+  color: white;
+
+  border: 2px solid #333;
+  border-radius: 10px;
+
+  font-size: 28px;
+  font-weight: bold;
+
+  margin-bottom: 20px;
+}
+
+/* SCORE */
+
+.score {
+  font-family: "Digital7", monospace;
+
+  font-size: 230px;
+  line-height: 1;
+
+  color: #ff2020;
+
+  text-shadow:
+    0 0 2px #ff0000,
+    0 0 6px #ff0000,
+    0 0 12px #ff0000;
+}
+
+/* CENTER */
+
+.center-side {
+  text-align: center;
+  margin-top: 25px;
+}
+
+/* TIMER */
+
+.timer {
+  font-family: "Digital7", monospace;
+
+  font-size: 190px;
+  line-height: 1;
+
+  color: #ff2020;
+
+  text-shadow:
+    0 0 2px #ff0000,
+    0 0 6px #ff0000,
+    0 0 12px #ff0000;
+}
+
+/* PERIOD */
+
+.period {
+  margin-top: 70px;
+
+  font-size: 36px;
+  font-weight: bold;
+
+  letter-spacing: 3px;
+}
+
+/* INFO */
+
+.info {
+  margin-top: 25px;
+  margin-bottom: 35px;
+
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.yellow {
+  margin-bottom: 25px;
+
+  font-size: 42px;
+  font-weight: bold;
+
+  color: yellow;
+}
+
+.red {
+  font-size: 42px;
+  font-weight: bold;
+
+  color: #ff5555;
+}
+
+/* CONTROLS */
+
+.controls {
+  margin-top: 50px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.controls button {
+  padding: 12px 18px;
+
+  background: #1565c0;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.controls button:hover {
+  background: #1976d2;
+}
+
+/* OPERATOR */
+
+.operator {
+  margin-top: 40px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.card {
+  width: 340px;
+
+  background: #111;
+
+  border: 1px solid #333;
+  border-radius: 12px;
+
+  padding: 20px;
+}
+
+.card h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.card button {
+  width: 100%;
+
+  padding: 12px;
+
+  margin-bottom: 10px;
+
+  background: #444;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.card button:hover {
+  background: #666;
+}
+
+/* TIMER HABIS */
+
+.blink {
+  animation: blinkRed 0.5s infinite;
+}
+
+@keyframes blinkRed {
+
+  0% {
+    opacity: 1;
+    color: #ff0000;
+  }
+
+  50% {
+    opacity: 0;
+    color: #ffffff;
+  }
+
+  100% {
+    opacity: 1;
+    color: #ff0000;
+  }
+}
+
+/* FULLSCREEN TV */
+
+body:fullscreen .controls {
+  opacity: 0.95;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1400px) {
+
+  .scoreboard {
+    grid-template-columns: 1fr;
+  }
+
+  .center-side {
+    margin-top: 0;
+  }
+
+  .timer {
+    font-size: 130px;
+  }
+
+  .score {
+    font-size: 150px;
+  }
+
+  .period {
+    margin-top: 30px;
+  }
+
+  .team-input {
+    width: 90%;
+  }
+}
