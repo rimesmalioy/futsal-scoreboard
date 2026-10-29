@@ -49,7 +49,8 @@ const [redB, setRedB] = useState(
 
   // MATCH TIMER
   const [matchSeconds, setMatchSeconds] = useState(20 * 60);
-
+const [savedMatchTime, setSavedMatchTime] = useState(20 * 60
+);
   // TIME OUT TIMER
   const [timeoutMode, setTimeoutMode] = useState(false);
   const [timeoutSeconds, setTimeoutSeconds] = useState(60);
@@ -123,7 +124,7 @@ const [redB, setRedB] = useState(
   }, [matchSeconds, running, timeoutMode, gameMode]);
 
   // TIMER TIMEOUT
-  useEffect(() => {
+useEffect(() => {
   let interval;
 
   if (timeoutMode && timeoutSeconds > 0) {
@@ -132,7 +133,22 @@ const [redB, setRedB] = useState(
     }, 1000);
   }
 
+  if (timeoutMode && timeoutSeconds === 0) {
+
+  playEnd();
+
+  setTimeoutMode(false);
+
+  setTimeoutSeconds(60);
+
+  setMatchSeconds(savedMatchTime);
+
+  setRunning(false);
+
+}
+
   return () => clearInterval(interval);
+
 }, [timeoutMode, timeoutSeconds]);
 
 // TEMPEL BLOK BARU DI SINI
@@ -210,16 +226,21 @@ const formatTime = (time) => {
     setGameMode("BABAK 1");
   };
 
-  const timeoutStart = () => {
-    playTimeout();
+const timeoutStart = () => {
 
-    setRunning(false);
+  if (timeoutMode) return;
 
-    setTimeoutMode(true);
+  playTimeout();
 
-    setTimeoutSeconds(60);
-  };
+  setSavedMatchTime(matchSeconds);
 
+  setRunning(false);
+
+  setTimeoutMode(true);
+
+  setTimeoutSeconds(60);
+
+};
   const fullscreen = () => {
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen();
